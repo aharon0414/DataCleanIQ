@@ -26,7 +26,7 @@ export function detectMissingValues(
   });
 
   const missingCount = missingValues.length;
-  const missingPercent = (missingCount / data.length) * 100;
+  const missingPercent = parseFloat(((missingCount / data.length) * 100).toFixed(1));
 
   if (missingCount === 0) return null;
 

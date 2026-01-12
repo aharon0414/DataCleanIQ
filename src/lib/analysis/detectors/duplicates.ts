@@ -15,7 +15,7 @@ export function detectDuplicates(data: any[]): Issue | null {
     }
   });
 
-  const duplicatePercent = (duplicateCount / data.length) * 100;
+  const duplicatePercent = parseFloat(((duplicateCount / data.length) * 100).toFixed(1));
 
   if (duplicateCount === 0) return null;
 

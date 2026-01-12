@@ -26,7 +26,7 @@ export function detectOutliers(
   // Count outliers
   const outliers = values.filter(val => val < lowerBound || val > upperBound);
   const outlierCount = outliers.length;
-  const outlierPercent = (outlierCount / values.length) * 100;
+  const outlierPercent = parseFloat(((outlierCount / values.length) * 100).toFixed(1));
 
   if (outlierCount === 0) return null;
 

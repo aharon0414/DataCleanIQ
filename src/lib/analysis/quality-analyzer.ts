@@ -58,11 +58,11 @@ export function analyzeDataQuality(data: any[]): QualityReport {
     const outlierPercent = outlierIssue?.percentage || 0;
     
     // Column Score = 100 - (Missing % × 2) - (Outlier % × 1) - etc.
-    const score = Math.max(0, 
+    const score = Math.round(Math.max(0, 
       100 
       - (missingPercent * 2)
       - (outlierPercent * 1)
-    );
+    ));
 
     const rating: QualityRating = 
       score >= 90 ? 'excellent' :
@@ -74,8 +74,8 @@ export function analyzeDataQuality(data: any[]): QualityReport {
       column,
       score,
       rating,
-      missingPercent,
-      outlierPercent,
+      missingPercent: parseFloat(missingPercent.toFixed(1)),
+      outlierPercent: parseFloat(outlierPercent.toFixed(1)),
       typeInconsistencies: 0,
       formatIssuePercent: 0,
       duplicatePercent: 0,

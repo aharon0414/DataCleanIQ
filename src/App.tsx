@@ -1,17 +1,96 @@
 import { useState } from 'react';
 import { FileUpload, FileMetadata } from './components/FileUpload';
 import { FileText, Calendar, Database, HardDrive } from 'lucide-react';
+import { QualityDashboard } from './components/visualizations/QualityDashboard';
+import { ColumnProfileCard } from './components/visualizations/ColumnProfileCard';
+import { SuggestedFixes } from './components/SuggestedFixes';
 import type { QualityReport } from './types/quality';
+import { analyzeDataQuality } from './lib/analysis/quality-analyzer';
+import { 
+  generateSuggestedFixes, 
+  applyTransformations,
+  type Transformation 
+} from './lib/transformations/transformation-engine';
 
 function App() {
-  const [data, setData] = useState<any[]>([]);
+  const [originalData, setOriginalData] = useState<any[]>([]);
+  const [currentData, setCurrentData] = useState<any[]>([]);
   const [report, setReport] = useState<QualityReport | null>(null);
   const [metadata, setMetadata] = useState<FileMetadata | null>(null);
+  const [suggestions, setSuggestions] = useState<Transformation[]>([]);
+  const [hasAppliedFixes, setHasAppliedFixes] = useState(false);
 
   const handleAnalysisComplete = (parsedData: any[], qualityReport: QualityReport, fileMetadata: FileMetadata) => {
-    setData(parsedData);
+    setOriginalData(parsedData);
+    setCurrentData(parsedData);
     setReport(qualityReport);
     setMetadata(fileMetadata);
+    setSuggestions(generateSuggestedFixes(qualityReport));
+    setHasAppliedFixes(false);
+  };
+
+  const handleToggleFix = (id: string) => {
+    setSuggestions(prev => 
+      prev.map(s => s.id === id ? { ...s, applied: !s.applied } : s)
+    );
+  };
+
+  const handleSelectAll = () => {
+    const allSelected = suggestions.every(s => s.applied);
+    setSuggestions(prev => 
+      prev.map(s => ({ ...s, applied: !allSelected }))
+    );
+  };
+
+  const handlePreview = (id: string) => {
+    // TODO: Show modal with before/after preview
+    console.log('Preview transformation:', id);
+    alert(`Preview for transformation "${id}" - Coming soon!`);
+  };
+
+  const handleApplyAll = () => {
+    const result = applyTransformations(originalData, suggestions);
+    setCurrentData(result.cleanedData);
+    
+    // Re-analyze cleaned data
+    const newReport = analyzeDataQuality(result.cleanedData);
+    setReport(newReport);
+    setHasAppliedFixes(true);
+    
+    // Regenerate suggestions for remaining issues
+    setSuggestions(generateSuggestedFixes(newReport));
+  };
+
+  const handleExport = () => {
+    if (currentData.length === 0) return;
+
+    // Convert to CSV and download
+    const headers = Object.keys(currentData[0]);
+    const csvContent = [
+      headers.join(','),
+      ...currentData.map(row => 
+        headers.map(h => {
+          const value = row[h];
+          if (value === null || value === undefined) return '';
+          // Escape quotes and wrap in quotes if contains comma, newline, or quote
+          const stringValue = String(value);
+          if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
+            return '"' + stringValue.replace(/"/g, '""') + '"';
+          }
+          return stringValue;
+        }).join(',')
+      )
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = metadata?.filename ? metadata.filename.replace('.csv', '_cleaned.csv') : 'cleaned_data.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const formatFileSize = (bytes: number): string => {
@@ -19,7 +98,7 @@ function App() {
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    return (bytes / Math.pow(k, i)).toFixed(1) + ' ' + sizes[i];
   };
 
   const formatDate = (date: Date): string => {
@@ -72,7 +151,7 @@ function App() {
                       <div>
                         <div className="text-sm text-gray-500">Dimensions</div>
                         <div className="text-lg font-semibold text-gray-900">
-                          {metadata.rowCount.toLocaleString()} rows × {metadata.columnCount} columns
+                          {currentData.length.toLocaleString()} rows × {Object.keys(currentData[0] || {}).length} columns
                         </div>
                       </div>
                     </div>
@@ -88,33 +167,27 @@ function App() {
               </div>
             </div>
 
-            {/* Overall Score */}
+            {/* Quality Dashboard */}
+            <QualityDashboard report={report} />
+
+            {/* Suggested Fixes */}
+            <SuggestedFixes
+              suggestions={suggestions}
+              onToggle={handleToggleFix}
+              onPreview={handlePreview}
+              onSelectAll={handleSelectAll}
+              onApplyAll={handleApplyAll}
+              onExport={handleExport}
+              hasAppliedFixes={hasAppliedFixes}
+            />
+
+            {/* Column Profile Cards */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-2xl font-semibold mb-4">Quality Score</h2>
-              <div className="flex items-center gap-4">
-                <div className={`text-6xl font-bold ${
-                  report.rating === 'excellent' ? 'text-green-600' :
-                  report.rating === 'good' ? 'text-green-500' :
-                  report.rating === 'fair' ? 'text-yellow-500' :
-                  report.rating === 'poor' ? 'text-orange-500' :
-                  'text-red-600'
-                }`}>
-                  {report.overallScore}
-                </div>
-                <div>
-                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-                    report.rating === 'excellent' ? 'bg-green-100 text-green-800' :
-                    report.rating === 'good' ? 'bg-green-50 text-green-700' :
-                    report.rating === 'fair' ? 'bg-yellow-100 text-yellow-800' :
-                    report.rating === 'poor' ? 'bg-orange-100 text-orange-800' :
-                    'bg-red-100 text-red-800'
-                  }`}>
-                    {report.rating.toUpperCase()}
-                  </div>
-                  <p className="mt-2 text-sm text-gray-600">
-                    {report.issues.length} issue{report.issues.length !== 1 ? 's' : ''} detected
-                  </p>
-                </div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Column Quality Profiles</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {report.columnScores.map((columnScore, index) => (
+                  <ColumnProfileCard key={index} columnScore={columnScore} />
+                ))}
               </div>
             </div>
 
@@ -151,13 +224,18 @@ function App() {
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-2xl font-semibold mb-4">Data Preview</h2>
               <p className="text-sm text-gray-600 mb-4">
-                Showing first 10 rows of {data.length} total
+                Showing first 10 rows of {currentData.length.toLocaleString()} total
+                {hasAppliedFixes && (
+                  <span className="ml-2 text-green-600 font-medium">
+                    (Cleaned: {originalData.length.toLocaleString()} → {currentData.length.toLocaleString()} rows)
+                  </span>
+                )}
               </p>
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      {Object.keys(data[0] || {}).map(col => (
+                      {Object.keys(currentData[0] || {}).map(col => (
                         <th key={col} className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
                           {col}
                         </th>
@@ -165,7 +243,7 @@ function App() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {data.slice(0, 10).map((row, idx) => (
+                    {currentData.slice(0, 10).map((row, idx) => (
                       <tr key={idx}>
                         {Object.values(row).map((val: any, i) => (
                           <td key={i} className="px-4 py-2 text-sm text-gray-900">
@@ -186,9 +264,12 @@ function App() {
             {/* Reset Button */}
             <button
               onClick={() => {
-                setData([]);
+                setOriginalData([]);
+                setCurrentData([]);
                 setReport(null);
                 setMetadata(null);
+                setSuggestions([]);
+                setHasAppliedFixes(false);
               }}
               className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
             >

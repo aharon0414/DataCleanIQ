@@ -1,0 +1,65 @@
+order_id,customer_name,email,order_date,product,quantity,price,discount_percent,revenue,status,region
+1002,Sarah Johnson,,01/15/2024,Mouse,1,29.99,5,28.49,Completed,New York
+1003,,sara.j@email.com,15-Jan-2024,Keyboard,3,79.99,15,203.97,COMPLETED,Texas
+1004,Mike Wilson,N/A,2024-01-16,Monitor,1,299.99,0,299.99,pending,
+1005,Emily Brown,emily@email.com,01/16/2024,Headphones,2,59.99,20,47.99,completed,Florida
+1008,Robert Taylor,robert.t@email.com,2024-01-18,Webcam,2,-49.99,5,-94.98,COMPLETED,Texas
+1009,Jennifer White,None,01/18/2024,Keyboard,1,79.99,25,59.99,,Washington
+1011,Jessica Davis,,17-Jan-2024,,2,59.99,15,101.98,completed,Nevada
+1014,Daniel Garcia,,2024-01-21,Keyboard,2,79.99,10,143.98,COMPLETED,Colorado
+1015,Michelle Rodriguez,michelle@email.com,18-Jan-2024,Headphones,1,59.99,0,59.99,pending,Utah
+1016,Kevin Lee,N/A,2024-01-22,Monitor,1,299.99,15,254.99,,Nevada
+1017,,james.t@email.com,01/22/2024,Webcam,3,49.99,5,142.47,Completed,Texas
+1019,Brian Thomas,,19-Jan-2024,Mouse,2,29.99,25,44.99,COMPLETED,
+1021,null,mark.w@email.com,01/24/2024,Headphones,2,59.99,15,50.99,completed,New York
+1023,Justin Harris,None,20-Jan-2024,Webcam,1,-49.99,10,-44.99,COMPLETED,Oregon
+1024,Nicole Martin,nicole@email.com,2024-01-26,Keyboard,3,79.99,20,191.98,completed,Texas
+1025,Timothy Thompson,N/A,01/26/2024,,1,59.99,5,56.99,pending,Arizona
+1027,Rebecca Garcia,rebecca@email.com,21-Jan-2024,Mouse,1,29.99,25,22.49,completed,Colorado
+1029,Ashley Robinson,ashley@email.com,01/28/2024,Headphones,1,59.99,0,59.99,,Nevada
+1031,null,brandon.r@email.com,22-Jan-2024,Webcam,2,49.99,5,94.98,Completed,New York
+1034,Kimberly Hall,,2024-01-31,Keyboard,1,79.99,20,63.99,completed,California
+1035,Jacob Allen,jacob@email.com,23-Jan-2024,Headphones,2,59.99,5,56.99,pending,Texas
+1037,,eric.h@email.com,01/02/2024,Webcam,1,49.99,15,42.49,,Colorado
+1039,Tyler Wright,,24-Jan-2024,Mouse,2,29.99,25,44.99,COMPLETED,Nevada
+1040,Brittany Lopez,brittany@email.com,2024-02-03,Keyboard,1,79.99,5,75.99,pending,Florida
+1041,null,connor.s@email.com,01/03/2024,,2,59.99,15,101.98,Completed,New York
+1044,Morgan Green,N/A,2024-02-05,Webcam,1,49.99,0,49.99,,Texas
+1046,Taylor Adams,taylor@email.com,2024-02-06,Mouse,3,29.99,20,71.98,Completed,Arizona
+1047,Jordan Baker,None,26-Jan-2024,Keyboard,2,79.99,15,67.99,completed,Colorado
+1048,Casey Nelson,,2024-02-07,Headphones,2,59.99,0,119.98,COMPLETED,Utah
+1049,Riley Carter,riley@email.com,01/07/2024,Monitor,1,299.99,10,269.99,completed,Nevada
+1050,Dakota Mitchell,N/A,2024-02-08,Webcam,2,49.99,5,94.98,pending,Florida
+1052,Avery Roberts,avery@email.com,2024-02-09,,3,79.99,20,191.98,completed,Oregon
+1053,Quinn Turner,None,01/09/2024,Mouse,1,29.99,25,22.49,COMPLETED,California
+1054,Cameron Phillips,,2024-02-10,Keyboard,2,79.99,5,151.98,,Texas
+1055,Skylar Campbell,skylar@email.com,28-Jan-2024,Headphones,1,59.99,0,59.99,pending,Arizona
+1057,,river.e@email.com,01/11/2024,Webcam,1,49.99,10,44.99,completed,Utah
+1059,Rowan Collins,,29-Jan-2024,Mouse,2,29.99,15,50.98,completed,Florida
+1060,Phoenix Stewart,phoenix@email.com,2024-02-13,Keyboard,1,79.99,20,63.99,pending,
+1061,null,sawyer.s@email.com,01/13/2024,Headphones,2,59.99,5,56.99,Completed,New York
+1065,River Reed,None,01/15/2024,Mouse,3,29.99,25,67.48,completed,California
+1066,Nova Cook,,2024-02-16,Keyboard,1,79.99,5,75.99,pending,Arizona
+1067,Sage Morgan,sage.m@email.com,31-Jan-2024,Headphones,2,59.99,0,119.98,Completed,Colorado
+1069,,storm.m@email.com,01/17/2024,,1,49.99,15,42.49,COMPLETED,Nevada
+1071,Echo Bailey,,01/02/2024,Mouse,1,29.99,5,28.49,pending,New York
+1072,Onyx Rivera,onyx@email.com,2024-02-19,Keyboard,3,79.99,20,191.98,Completed,Washington
+1073,null,atlas.c@email.com,02-Feb-2024,Headphones,1,-59.99,0,-59.99,completed,California
+1075,Solstice Richardson,,01/20/2024,Webcam,2,49.99,5,47.49,completed,Arizona
+1077,Cosmos Howard,None,03-Feb-2024,Mouse,2,29.99,25,44.99,Completed,
+1078,,nova.w@email.com,2024-02-22,Keyboard,1,79.99,5,75.99,completed,Nevada
+1079,Celestial Ward,celestial@email.com,01/22/2024,Headphones,3,59.99,0,179.97,COMPLETED,Florida
+1080,Nebula Torres,,2024-02-23,Monitor,1,299.99,10,269.99,completed,New York
+1081,Galaxy Peterson,N/A,04-Feb-2024,Webcam,2,49.99,15,84.98,pending,Washington
+1084,Aurora Ramirez,None,2024-02-25,Keyboard,1,79.99,25,59.99,COMPLETED,California
+1085,Blaze James,,05-Feb-2024,Headphones,2,59.99,0,59.99,,Arizona
+1087,Phoenix Brooks,N/A,01/26/2024,Webcam,1,49.99,5,47.49,Completed,Utah
+1089,River Kelly,river.k@email.com,06-Feb-2024,Mouse,1,29.99,20,23.99,COMPLETED,Florida
+1090,Sage Sanders,None,2024-02-28,Keyboard,2,79.99,5,151.98,completed,New York
+1091,null,dakota.p@email.com,01/28/2024,Headphones,1,59.99,0,59.99,pending,Washington
+1092,Nova Price,nova.p@email.com,2024-02-29,Monitor,1,299.99,10,269.99,Completed,Oregon
+1093,Atlas Bennett,,07-Feb-2024,Webcam,2,49.99,15,84.98,completed,Texas
+1094,Lyric Wood,lyric.w@email.com,2024-03-01,,1,79.99,5,75.99,COMPLETED,California
+1096,,onyx.r@email.com,2024-03-02,Keyboard,1,79.99,25,59.99,pending,Colorado
+1097,Zenith Ross,zenith@email.com,08-Feb-2024,Headphones,2,59.99,0,119.98,Completed,Utah
+1099,Meridian Coleman,,01/03/2024,Webcam,2,49.99,5,47.49,COMPLETED,Florida
