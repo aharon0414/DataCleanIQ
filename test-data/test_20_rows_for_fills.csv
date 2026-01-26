@@ -1,0 +1,22 @@
+order_id,customer_name,email,product,quantity,price,discount_percent,revenue,status,region
+1001,John Smith,john@email.com,Laptop,2,899.99,10,1619.98,completed,California
+1002,Sarah Johnson,,Mouse,,29.99,5,28.49,completed,New York
+1003,Mike Wilson,mike@email.com,Keyboard,3,,15,203.97,completed,Texas
+1004,Emily Brown,emily@email.com,Monitor,1,299.99,,299.99,completed,Florida
+1005,David Lee,david@email.com,Headphones,2,59.99,20,95.98,completed,Washington
+1001,John Smith,john@email.com,Laptop,2,899.99,10,1619.98,completed,California
+1006,Lisa Chen,,Webcam,,49.99,10,44.99,completed,Oregon
+1007,Robert Taylor,robert@email.com,Mouse,1,29.99,5,28.49,completed,Arizona
+1008,Jennifer White,jennifer@email.com,Keyboard,9999,79.99,25,59999.25,completed,Colorado
+1009,Michael Brown,,Monitor,2,,0,599.98,completed,Utah
+1010,Amanda Garcia,amanda@email.com,Headphones,1,59.99,15,50.99,completed,Nevada
+1011,Christopher Lee,chris@email.com,Laptop,,899.99,5,854.99,completed,California
+1012,Jessica Martinez,,Webcam,3,49.99,,142.47,completed,Texas
+1013,Daniel Rodriguez,daniel@email.com,Mouse,2,29.99,20,47.98,completed,Arizona
+1014,Ashley Thompson,ashley@email.com,Keyboard,1,,10,71.99,completed,Florida
+1015,Matthew Davis,matthew@email.com,Monitor,2,299.99,0,599.98,completed,Oregon
+1016,Nicole Anderson,,Headphones,,59.99,25,44.99,completed,Washington
+1017,Ryan Wilson,ryan@email.com,Laptop,1,899.99,15,764.99,completed,California
+1018,Lauren Thomas,lauren@email.com,Mouse,2,29.99,5,56.98,completed,Nevada
+1019,Brandon Moore,brandon@email.com,Keyboard,3,79.99,20,191.98,completed,Utah
+1020,Stephanie Taylor,stephanie@email.com,Monitor,1,299.99,10,269.99,completed,Colorado

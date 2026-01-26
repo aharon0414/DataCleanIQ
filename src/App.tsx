@@ -25,7 +25,7 @@ function App() {
     setCurrentData(parsedData);
     setReport(qualityReport);
     setMetadata(fileMetadata);
-    setSuggestions(generateSuggestedFixes(qualityReport));
+    setSuggestions(generateSuggestedFixes(qualityReport, parsedData));
     setHasAppliedFixes(false);
   };
 
@@ -49,16 +49,44 @@ function App() {
   };
 
   const handleApplyAll = () => {
+    console.log('🚀 APPLY ALL FIXES STARTED');
+    console.log('Original data:', {
+      rowCount: originalData.length,
+      sampleRow: originalData[0]
+    });
+    console.log('Transformations to apply:', suggestions.filter(s => s.applied).length);
+    
     const result = applyTransformations(originalData, suggestions);
+    
+    console.log('🎁 TRANSFORMATION RESULT:', {
+      originalRowCount: originalData.length,
+      cleanedRowCount: result.cleanedData.length,
+      rowsRemoved: originalData.length - result.cleanedData.length,
+      transformationsApplied: result.transformationsApplied,
+      sampleOriginalRow: originalData[0],
+      sampleCleanedRow: result.cleanedData[0],
+      auditLog: result.auditLog
+    });
+    
     setCurrentData(result.cleanedData);
+    console.log('✅ State updated with cleaned data');
     
     // Re-analyze cleaned data
     const newReport = analyzeDataQuality(result.cleanedData);
+    console.log('📊 NEW QUALITY REPORT:', {
+      oldScore: report?.overallScore,
+      newScore: newReport.overallScore,
+      improvement: newReport.overallScore - (report?.overallScore || 0),
+      remainingIssues: newReport.issues.length
+    });
+    
     setReport(newReport);
     setHasAppliedFixes(true);
     
     // Regenerate suggestions for remaining issues
-    setSuggestions(generateSuggestedFixes(newReport));
+    setSuggestions(generateSuggestedFixes(newReport, result.cleanedData));
+    
+    console.log('🏁 APPLY ALL FIXES COMPLETE');
   };
 
   const handleExport = () => {

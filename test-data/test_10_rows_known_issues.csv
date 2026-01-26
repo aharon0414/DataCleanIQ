@@ -1,0 +1,11 @@
+order_id,customer_name,email,product,quantity,price,discount_percent,status,region
+1001,John Smith,john@email.com,Laptop,2,899.99,10,completed,California
+1002,Sarah Johnson,,Mouse,1,29.99,5,completed,New York
+1003,Mike Wilson,mike@email.com,Keyboard,9999,79.99,15,completed,Texas
+1004,Emily Brown,emily@email.com,Monitor,2,299.99,0,completed,Florida
+1001,John Smith,john@email.com,Laptop,2,899.99,10,completed,California
+1006,David Lee,david@email.com,Headphones,1,59.99,20,completed,Washington
+1007,Lisa Chen,,Webcam,3,49.99,10,completed,Oregon
+1008,Robert Taylor,robert@email.com,Mouse,2,29.99,5,completed,Arizona
+1009,Jennifer White,,Keyboard,1,79.99,25,completed,Colorado
+1010,Michael Brown,michael@email.com,Monitor,1,299.99,15,completed,Utah
